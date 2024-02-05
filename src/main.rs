@@ -5,13 +5,15 @@ use speedy2d::{Graphics2D,Window};
 use vector::Vector;
 fn main() {
     let window = Window::new_centered("Pendulum", (800, 480)).unwrap();
-    let win: MyWindowHandler = MyWindowHandler { p: Pendulum::new(400.0, 0.0, 200.0) };
+    let win: MyWindowHandler = MyWindowHandler { p: Pendulum::new(400.0, 0.0, 200.0), p2: Pendulum::new(400.0, 0.0, 400.0) };
     window.run_loop(win);
 
 }
 
 struct MyWindowHandler {
-    p: Pendulum
+    p: Pendulum,
+    p2: Pendulum
+
 }
 
 impl WindowHandler for MyWindowHandler {
@@ -20,6 +22,9 @@ impl WindowHandler for MyWindowHandler {
         
         self.p.update();
         self.p.draw(graphics);
+
+        self.p2.update();
+        self.p2.draw(graphics);
         helper.request_redraw();
     }
 }
